@@ -47,6 +47,12 @@ public class Banka {
 
 	@OneToMany(mappedBy = "banka", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Racun> racuni;
+	
+	@Column(nullable = false, length = 18)
+	private String obracunskiRacun;
+	
+	@Column(nullable = false, length = 8)
+	private String SwiftKod;
 
 	public Banka() {
 
@@ -138,6 +144,22 @@ public class Banka {
 
 	public void setRacuni(List<Racun> racuni) {
 		this.racuni = racuni;
+	}
+
+	public String getObracunskiRacun() {
+		return obracunskiRacun;
+	}
+
+	public void setObracunskiRacun(String obracunskiRacun) {
+		this.obracunskiRacun = obracunskiRacun;
+	}
+
+	public String getSwiftKod() {
+		return SwiftKod;
+	}
+
+	public void setSwiftKod(String swiftKod) {
+		SwiftKod = swiftKod;
 	}
 
 }
