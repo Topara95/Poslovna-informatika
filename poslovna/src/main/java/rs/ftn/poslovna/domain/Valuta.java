@@ -31,9 +31,16 @@ public class Valuta {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DRZAVA_ID", nullable = false)
 	private Drzava drzava;
-	
+
 	public Valuta() {
-		
+
+	}
+
+	public Valuta(String zvanicnaSifra, String naziv, boolean domicilna, Drzava drzava) {
+		this.zvanicnaSifra = zvanicnaSifra;
+		this.naziv = naziv;
+		this.domicilna = domicilna;
+		this.drzava = drzava;
 	}
 
 	public int getId() {

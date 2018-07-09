@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-title>Nova drzava</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput type="number" placeholder="Sifra drzave" formControlName="id">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Naziv drzave" formControlName="nazivDrzave">
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary">Dodaj</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<h1>Drzave</h1>
+
+<table border="1">
+  <tr>
+      <th>Sifra drzave</th>
+      <th>Naziv drzave</th>
+  </tr>
+  <tr *ngFor="let drzava of drzave">
+    <td>{{ drzava.id }}</td>
+    <td>{{ drzava.nazivDrzave }}</td>
+  </tr>
+</table>

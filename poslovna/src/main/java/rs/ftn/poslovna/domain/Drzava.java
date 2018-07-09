@@ -26,6 +26,11 @@ public class Drzava {
 
 	}
 
+	public Drzava(short id, String nazivDrzave) {
+		this.id = id;
+		this.nazivDrzave = nazivDrzave;
+	}
+
 	public short getId() {
 		return id;
 	}

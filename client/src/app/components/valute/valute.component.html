@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>Nova valuta</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput type="number" placeholder="Zvanicna sifra" formControlName="zvanicnaSifra">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Naziv" formControlName="naziv">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="drzavaId">
+          <mat-option *ngFor="let drzava of drzave" [value]="drzava.id">
+            {{ drzava.nazivDrzave }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <section>
+        <mat-checkbox formControlName="domicilna">Domicilna</mat-checkbox>
+      </section>
+      <button type="submit" mat-raised-button color="primary">Dodaj</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<h1>Valute</h1>
+
+<table border="1">
+  <tr>
+      <th>Id valute</th>
+      <th>Zvanicna sifra</th>
+      <th>Naziv</th>
+      <th>Domicilna</th>
+      <th>Drzava</th>
+  </tr>
+  <tr *ngFor="let valuta of valute">
+    <td>{{ valuta.id }}</td>
+    <td>{{ valuta.zvanicnaSifra }}</td>
+    <td>{{ valuta.naziv }}</td>
+    <td>{{ valuta.domicilna ? "Da" : "Ne" }}</td>
+    <td>{{ valuta.drzavaId }}</td>
+  </tr>
+</table>

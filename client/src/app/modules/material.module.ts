@@ -18,7 +18,8 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatTableModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 const modules: any[] = [
@@ -40,7 +41,8 @@ const modules: any[] = [
   MatNativeDateModule,
   MatSelectModule,
   MatTableModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
