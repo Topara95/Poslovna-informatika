@@ -1,0 +1,53 @@
+<app-navbar
+  (first)="onFirst()"
+  (previous)="onPrevious()"
+  (next)="onNext()"
+  (last)="onLast()"
+  [preci]="tableInfo.preci"
+  [potomci]="tableInfo.potomci"
+></app-navbar>
+
+<h1>{{ tableInfo.naslov }}</h1>
+
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ng-container *ngFor="let prikaz of tableInfo.prikazForme">
+        <mat-form-field *ngIf="prikaz.table !== undefined; else template">
+            <input matInput
+              [type]="prikaz.tip"
+              [placeholder]="prikaz.labela"
+              [formControlName]="prikaz.imeKontrole">
+            <mat-icon matSuffix (click)="onSelectRelation(prikaz)">zoom_in</mat-icon>
+        </mat-form-field>
+        <ng-template #template>
+          <ng-container [ngSwitch]="prikaz.tip">
+            <section *ngSwitchCase="'checkbox'">
+              <mat-checkbox [formControlName]="prikaz.imeKontrole">{{ prikaz.labela }}</mat-checkbox>
+            </section>
+            <div *ngSwitchCase="'date'">
+              <label>{{ prikaz.labela }}</label>
+              <input type="date"
+                [formControlName]="prikaz.imeKontrole"
+              />
+            </div>
+            <mat-form-field *ngSwitchDefault>
+                <input matInput
+                  [type]="prikaz.tip"
+                  [placeholder]="prikaz.labela"
+                  [formControlName]="prikaz.imeKontrole">
+            </mat-form-field>
+          </ng-container>
+        </ng-template>
+      </ng-container>
+
+      <button [disabled]="!form.valid" type="submit" mat-raised-button color="primary">Dodaj</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<app-table
+  [tableInfo]="tableInfo"
+  [podaci]="podaci"
+  [highlighted]="highlighted"
+></app-table>

@@ -1,7 +1,48 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
-  <mat-toolbar-row>
-    <a mat-button routerLink="drzave">Drzave</a>
-    <a mat-button routerLink="valute">Valute</a>
-    <a mat-button routerLink="naseljenaMesta">Naseljeno mesto</a>
-  </mat-toolbar-row>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+    Sve tabele
+  </button>
+
+  <!-- Navigation -->
+  <button mat-icon-button (click)="first.emit()" matTooltip="Prvi red">
+      <mat-icon>first_page</mat-icon>
+  </button>
+  <button mat-icon-button (click)="previous.emit()" matTooltip="Prethodni red">
+      <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button mat-icon-button (click)="next.emit()" matTooltip="Sledeci red">
+      <mat-icon>chevron_right</mat-icon>
+  </button>
+  <button mat-icon-button (click)="last.emit()" matTooltip="Poslednji red">
+      <mat-icon>last_page</mat-icon>
+  </button>
+
+  <button *ngIf="preci" mat-button [matMenuTriggerFor]="preciMenu">
+    <mat-icon>near_me</mat-icon>
+    Preci
+  </button>
+
+  <button *ngIf="potomci" mat-button [matMenuTriggerFor]="potomciMenu">
+      <mat-icon>near_me</mat-icon>
+    Potomci
+  </button>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let ruta of tableRoutes" [routerLink]="['/' + ruta.ruta]">
+    <span>{{ ruta.labela }}</span>
+  </button>
+</mat-menu>
+
+<mat-menu #preciMenu="matMenu">
+    <button mat-menu-item *ngFor="let predak of preci" [routerLink]="[predak.ruta]">
+      <span>{{ predak.labela }}</span>
+    </button>
+  </mat-menu>
+
+<mat-menu #potomciMenu="matMenu">
+  <button mat-menu-item *ngFor="let potomak of potomci" [routerLink]="[potomak.ruta]">
+    <span>{{ potomak.labela }}</span>
+  </button>
+</mat-menu>

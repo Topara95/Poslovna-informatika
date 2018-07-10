@@ -8,6 +8,10 @@ mat-form-field {
   width: 100%;
 }
 
+h1 {
+  text-align: center;
+}
+
 mat-form-field mat-icon {
   cursor: pointer;
 }

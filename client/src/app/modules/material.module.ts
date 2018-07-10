@@ -19,7 +19,8 @@ import {
   MatSelectModule,
   MatTableModule,
   MatTooltipModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatMenuModule
 } from '@angular/material';
 
 const modules: any[] = [
@@ -42,7 +43,8 @@ const modules: any[] = [
   MatSelectModule,
   MatTableModule,
   MatTooltipModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatMenuModule
 ];
 
 @NgModule({

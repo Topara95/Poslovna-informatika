@@ -9,9 +9,7 @@ import { MaterialModule } from './modules/material.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { DrzaveComponent } from './components/drzave/drzave.component';
-import { ValuteComponent } from './components/valute/valute.component';
-import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-mesta.component';
+import { EntityComponent } from './components/entity/entity.component';
 import { TableComponent } from './components/table/table.component';
 import { ZoomTableComponent } from './components/zoom-table/zoom-table.component';
 
@@ -19,9 +17,7 @@ import { ZoomTableComponent } from './components/zoom-table/zoom-table.component
   declarations: [
     AppComponent,
     NavbarComponent,
-    DrzaveComponent,
-    ValuteComponent,
-    NaseljenaMestaComponent,
+    EntityComponent,
     TableComponent,
     ZoomTableComponent
   ],

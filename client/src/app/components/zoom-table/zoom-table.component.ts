@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
 
 import { TableInfo } from '../../models/tableInfo';
 
@@ -11,10 +12,13 @@ import { TableInfo } from '../../models/tableInfo';
 export class ZoomTableComponent implements OnInit {
 
   selectedRow = -1;
+  podaci = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: TableInfo) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: TableInfo, private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get<any>(this.data.podaciUrl)
+      .subscribe(podaci => this.podaci = podaci);
   }
 
 }

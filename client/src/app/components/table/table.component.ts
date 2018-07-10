@@ -9,6 +9,8 @@ import { TableInfo } from '../../models/tableInfo';
 export class TableComponent implements OnInit {
 
   @Input() tableInfo: TableInfo;
+  @Input() podaci = [];
+  @Input() highlighted = -1;
 
   constructor() { }
 

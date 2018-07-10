@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DrzaveComponent } from './components/drzave/drzave.component';
-import { ValuteComponent } from './components/valute/valute.component';
-import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-mesta.component';
+
+import { TableRoutes } from './models/data';
+import { EntityComponent } from './components/entity/entity.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'drzave', pathMatch: 'full' },
-  { path: 'drzave', component: DrzaveComponent },
-  { path: 'valute', component: ValuteComponent },
-  { path: 'naseljenaMesta', component: NaseljenaMestaComponent }
+  { path: '', redirectTo: 'drzave', pathMatch: 'full' }
 ];
+
+for (const tableRoute of TableRoutes) {
+  routes.push({ path: tableRoute.ruta, component: EntityComponent, data: tableRoute.data });
+}
 
 @NgModule({
   imports: [
