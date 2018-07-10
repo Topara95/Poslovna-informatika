@@ -13,15 +13,4 @@
   </mat-card-content>
 </mat-card>
 
-<h1>Drzave</h1>
-
-<table border="1">
-  <tr>
-      <th>Sifra drzave</th>
-      <th>Naziv drzave</th>
-  </tr>
-  <tr *ngFor="let drzava of drzave">
-    <td>{{ drzava.id }}</td>
-    <td>{{ drzava.nazivDrzave }}</td>
-  </tr>
-</table>
+<app-table [tableInfo]="tableInfo"></app-table>

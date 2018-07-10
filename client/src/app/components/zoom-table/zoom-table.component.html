@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{ data.naslov }}</h2>
+<mat-dialog-content>
+  <table border="1">
+    <tr>
+        <th *ngFor="let kolona of data.kolone">{{ kolona }}</th>
+    </tr>
+    <tr *ngFor="let podatak of data.podaci; let i = index"
+      (click)="selectedRow = i"
+      [ngClass]="{ 'highlighted': selectedRow === i }">
+      <td *ngFor="let atribut of data.atributi">{{ podatak[atribut] }}</td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button color="accent" mat-raised-button mat-dialog-close>Zatvori</button>
+  <button
+    color="primary"
+    mat-raised-button
+    [disabled]="selectedRow === -1"
+    [mat-dialog-close]="data.podaci[selectedRow]">Izaberi</button>
+</mat-dialog-actions>

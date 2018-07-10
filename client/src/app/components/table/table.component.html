@@ -1,0 +1,10 @@
+<h1>{{ tableInfo.naslov }}</h1>
+
+<table border="1">
+  <tr>
+      <th *ngFor="let kolona of tableInfo.kolone">{{ kolona }}</th>
+  </tr>
+  <tr *ngFor="let podatak of tableInfo.podaci">
+    <td *ngFor="let atribut of tableInfo.atributi">{{ podatak[atribut] }}</td>
+  </tr>
+</table>

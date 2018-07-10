@@ -8,10 +8,6 @@ mat-form-field {
   width: 100%;
 }
 
-h1 {
-  text-align: center;
-}
-
-table {
-  margin: 20px auto;
+mat-form-field mat-icon {
+  cursor: pointer;
 }

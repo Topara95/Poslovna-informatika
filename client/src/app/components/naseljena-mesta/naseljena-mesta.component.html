@@ -9,30 +9,12 @@
         <input matInput placeholder="PTToznaka" formControlName="ptt">
       </mat-form-field>
       <mat-form-field>
-        <mat-select formControlName="drzavaId">
-          <mat-option *ngFor="let drzava of drzave" [value]="drzava.id">
-            {{ drzava.nazivDrzave }}
-          </mat-option>
-        </mat-select>
+        <input type="number" matInput placeholder="Sifra drzave" formControlName="drzavaId">
+        <mat-icon matSuffix (click)="onSelectDrzava()">zoom_in</mat-icon>
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary">Dodaj</button>
+      <button [disabled]="!form.valid" type="submit" mat-raised-button color="primary">Dodaj</button>
     </form>
   </mat-card-content>
 </mat-card>
 
-<h1>Naseljena mesta</h1>
-
-<table border="1">
-  <tr>
-      <th>Sifra mesta</th>
-      <th>Naziv</th>
-      <th>PTToznaka</th>
-      <th>Id drzave</th>
-  </tr>
-  <tr *ngFor="let naseljenoMesto of naseljenaMesta">
-    <td>{{ naseljenoMesto.id }}</td>
-    <td>{{ naseljenoMesto.naziv }}</td>
-    <td>{{ naseljenoMesto.ptt }}</td>
-    <td>{{ naseljenoMesto.drzavaId }}</td>
-  </tr>
-</table>
+<app-table [tableInfo]="tableInfo"></app-table>

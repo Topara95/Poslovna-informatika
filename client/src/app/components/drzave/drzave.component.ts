@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
+
 import { environment } from '../../../environments/environment';
+import { TableInfo } from '../../models/tableInfo';
 
 @Component({
   selector: 'app-drzave',
@@ -10,8 +12,14 @@ import { environment } from '../../../environments/environment';
 })
 export class DrzaveComponent implements OnInit {
 
+  tableInfo: TableInfo = {
+    kolone: ['Sifra drzave', 'Naziv drzave'],
+    atributi: ['id', 'nazivDrzave'],
+    podaci: [],
+    naslov: 'Drzave'
+  };
+
   form: FormGroup;
-  drzave = [];
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
@@ -22,13 +30,13 @@ export class DrzaveComponent implements OnInit {
     });
 
     this.http.get<any>(environment.hostUrl + '/api/drzave')
-      .subscribe(drzave => this.drzave = drzave);
+      .subscribe(drzave => this.tableInfo.podaci = drzave);
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.http.post<any>(environment.hostUrl + '/api/drzave', this.form.value)
-        .subscribe(drzava => this.drzave.push(drzava));
+        .subscribe(drzava => this.tableInfo.podaci.push(drzava));
     }
   }
 

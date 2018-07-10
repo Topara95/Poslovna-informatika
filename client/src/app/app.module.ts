@@ -12,6 +12,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DrzaveComponent } from './components/drzave/drzave.component';
 import { ValuteComponent } from './components/valute/valute.component';
 import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-mesta.component';
+import { TableComponent } from './components/table/table.component';
+import { ZoomTableComponent } from './components/zoom-table/zoom-table.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-
     NavbarComponent,
     DrzaveComponent,
     ValuteComponent,
-    NaseljenaMestaComponent
+    NaseljenaMestaComponent,
+    TableComponent,
+    ZoomTableComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,9 @@ import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-
     MaterialModule,
     ReactiveFormsModule,
     AppRoutingModule
+  ],
+  entryComponents: [
+    ZoomTableComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
