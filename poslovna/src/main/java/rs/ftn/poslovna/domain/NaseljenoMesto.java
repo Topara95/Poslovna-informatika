@@ -31,6 +31,12 @@ public class NaseljenoMesto {
 
 	}
 
+	public NaseljenoMesto(String naziv, String ptt, Drzava drzava) {
+		this.naziv = naziv;
+		this.ptt = ptt;
+		this.drzava = drzava;
+	}
+
 	public int getId() {
 		return id;
 	}

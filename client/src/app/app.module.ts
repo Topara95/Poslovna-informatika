@@ -11,13 +11,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DrzaveComponent } from './components/drzave/drzave.component';
 import { ValuteComponent } from './components/valute/valute.component';
+import { NaseljenaMestaComponent } from './components/naseljena-mesta/naseljena-mesta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     DrzaveComponent,
-    ValuteComponent
+    ValuteComponent,
+    NaseljenaMestaComponent
   ],
   imports: [
     BrowserModule,
