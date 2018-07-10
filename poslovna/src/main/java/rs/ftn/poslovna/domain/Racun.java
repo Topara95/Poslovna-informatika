@@ -41,11 +41,11 @@ public class Racun {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "KLIJENT_ID", nullable = false)
-	private Klijent klijent;
+	private Lice lice;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BANKA_ID", nullable = false)
-	private Banka banka;
+	private PravnoLice banka;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VALUTA_ID", nullable = false)
@@ -93,19 +93,19 @@ public class Racun {
 		this.validan = validan;
 	}
 
-	public Klijent getKlijent() {
-		return klijent;
+	public Lice getLice() {
+		return lice;
 	}
 
-	public void setKlijent(Klijent klijent) {
-		this.klijent = klijent;
+	public void setLice(Lice lice) {
+		this.lice = lice;
 	}
 
-	public Banka getBanka() {
+	public PravnoLice getBanka() {
 		return banka;
 	}
 
-	public void setBanka(Banka banka) {
+	public void setBanka(PravnoLice banka) {
 		this.banka = banka;
 	}
 

@@ -17,10 +17,11 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Klijent {
+public abstract class Lice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_LICA")
 	protected int id;
 
 	@Column(length = 250)
@@ -30,10 +31,10 @@ public abstract class Klijent {
 	@JoinColumn(name = "NASELJENO_MESTO_ID", nullable = false)
 	protected NaseljenoMesto naseljenoMesto;
 
-	@OneToMany(mappedBy = "klijent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "lice", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	protected List<Racun> racun;
 
-	public Klijent() {
+	public Lice() {
 
 	}
 

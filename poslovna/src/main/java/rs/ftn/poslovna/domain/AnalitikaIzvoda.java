@@ -84,6 +84,10 @@ public class AnalitikaIzvoda {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "ID_VALUTE", nullable = true)
 	private Valuta valuta;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="NALOG_ID", nullable = false)
+	private MedjubankarskiNalog medjubankarskiNalog;
 
 	public AnalitikaIzvoda() {
 	}
@@ -246,6 +250,14 @@ public class AnalitikaIzvoda {
 
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
+	}
+
+	public MedjubankarskiNalog getMedjubankarskiNalog() {
+		return medjubankarskiNalog;
+	}
+
+	public void setMedjubankarskiNalog(MedjubankarskiNalog medjubankarskiNalog) {
+		this.medjubankarskiNalog = medjubankarskiNalog;
 	}
 
 }

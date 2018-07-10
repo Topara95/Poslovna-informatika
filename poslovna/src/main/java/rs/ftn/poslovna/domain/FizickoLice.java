@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class FizickoLice extends Klijent {
+public class FizickoLice extends Lice {
 
 	@Column(nullable = false, length = 120)
 	private String ime;
