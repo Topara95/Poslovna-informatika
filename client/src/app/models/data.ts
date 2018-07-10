@@ -63,8 +63,24 @@ const NaseljenoMesto: TableInfo = {
   ]
 };
 
+const AtributiBanke: TableInfo = {
+  kolone: ['Sifra banke', 'Swift kod'],
+  atributi: ['id', 'swiftKod'],
+  naslov: 'Atributi banaka',
+  podaciUrl: environment.hostUrl + '/api/atributiBanke',
+  prikazForme: [
+    { labela: 'Sifra banke', tip: 'text', imeKontrole: 'id' },
+    { labela: 'Swift kod', tip: 'text', imeKontrole: 'swiftKod' }
+  ],
+  modelForme: {
+    id: [null, [Validators.required,Validators.minLength(3),Validators.maxLength(3)]],
+    swiftKod: [null, [Validators.required,Validators.minLength(8),Validators.maxLength(8)]]
+  }
+}
+
 export const TableRoutes: TableRoute[] = [
   { ruta: 'drzave', labela: 'Drzave', data: Drzava },
   { ruta: 'valute', labela: 'Valute', data: Valuta },
-  { ruta: 'naseljenaMesta', labela: 'Naseljena mesta', data: NaseljenoMesto }
+  { ruta: 'naseljenaMesta', labela: 'Naseljena mesta', data: NaseljenoMesto },
+  { ruta: 'atributiBanaka', labela: 'Atributi banaka', data: AtributiBanke }
 ];
