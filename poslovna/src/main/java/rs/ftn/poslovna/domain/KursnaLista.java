@@ -11,9 +11,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class KursnaLista {
@@ -23,6 +27,7 @@ public class KursnaLista {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date datum;
@@ -36,9 +41,19 @@ public class KursnaLista {
 
 	@OneToMany(mappedBy = "kursnaLista", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Kurs> kursevi;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_PRAVNO_LICE", nullable = false)
+	private PravnoLice pravnoLice;
 
 	public KursnaLista() {
 
+	}
+
+	public KursnaLista(BigDecimal brojKursneListe, Date datumVazenja, PravnoLice pravnoLice) {
+		this.brojKursneListe = brojKursneListe;
+		this.datumVazenja = datumVazenja;
+		this.pravnoLice = pravnoLice;
 	}
 
 	public int getId() {
@@ -79,6 +94,14 @@ public class KursnaLista {
 
 	public void setKursevi(List<Kurs> kursevi) {
 		this.kursevi = kursevi;
+	}
+	
+	public PravnoLice getPravnoLice() {
+		return pravnoLice;
+	}
+	
+	public void setPravnoLice(PravnoLice pravnoLice) {
+		this.pravnoLice = pravnoLice;
 	}
 
 }
