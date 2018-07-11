@@ -60,6 +60,15 @@ public class Racun {
 	public Racun() {
 		
 	}
+	
+	public Racun(String brojRacuna, Date datumOtvaranja, boolean validan, Lice lice, PravnoLice banka, Valuta valuta) {
+		this.brojRacuna = brojRacuna;
+		this.datumOtvaranja = datumOtvaranja;
+		this.validan = validan;
+		this.lice = lice;
+		this.banka = banka;
+		this.valuta = valuta;
+	}
 
 	public Long getId() {
 		return id;

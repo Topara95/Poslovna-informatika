@@ -34,7 +34,7 @@ public class PravnoLice extends Lice {
 	@Column(nullable = true, length = 20)
 	private String faks;
 
-	@OneToOne
+	@OneToOne(optional = true)
 	@JoinColumn(nullable = true)
 	private AtributiBanke atributiBanke;
 	
@@ -43,6 +43,20 @@ public class PravnoLice extends Lice {
 	
 	public PravnoLice() {
 
+	}
+	
+	public PravnoLice(String adresa, NaseljenoMesto nm, String naziv, BigDecimal matbroj, BigDecimal pib,
+			String email, String web, String telefon, String faks, AtributiBanke ab) {
+		this.adresa = adresa;
+		this.naseljenoMesto = nm;
+		this.naziv = naziv;
+		this.maticniBroj = matbroj;
+		this.pib = pib;
+		this.email = email;
+		this.web = web;
+		this.telefon = telefon;
+		this.faks = faks;
+		this.atributiBanke = ab;
 	}
 
 	public String getNaziv() {

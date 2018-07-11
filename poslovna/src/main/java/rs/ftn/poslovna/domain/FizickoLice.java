@@ -30,6 +30,17 @@ public class FizickoLice extends Lice {
 	public FizickoLice() {
 
 	}
+	
+	public FizickoLice(String adresa, NaseljenoMesto nm, String ime, String prezime, BigDecimal jmbg, BigDecimal
+			brojlk, Drzava drzava) {
+		this.adresa = adresa;
+		this.naseljenoMesto=nm;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jmbg = jmbg;
+		this.brojLicneKarte = brojlk;
+		this.drzava = drzava;
+	}
 
 	public String getIme() {
 		return ime;
