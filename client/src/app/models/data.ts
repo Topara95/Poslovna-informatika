@@ -214,6 +214,44 @@ const KursnaLista: TableInfo = {
   }
 };
 
+const KursUValuti: TableInfo = {
+  kolone: ['Id kursa', 'Kupovni', 'Srednji', 'Prodajni', 'Sifra kursne liste', 'Sifra Osnovne Valute', 'Sifra prema Valuti'],
+  atributi: ['id', 'kupovni', 'srednji', 'prodajni', 'sifraKursneListe', 'sifraOsnovneValute', 'sifraPremaValuti'],
+  naslov: 'Kursevi u valuti',
+  podaciUrl: environment.hostUrl + '/api/kursevi',
+  prikazForme: [
+    { labela: 'Id kursa', tip: 'number', imeKontrole: 'id' },
+    { labela: 'Kupovni', tip: 'number', imeKontrole: 'kupovni' },
+    { labela: 'Prodajni', tip: 'number', imeKontrole: 'prodajni' },
+    { labela: 'Sifra kursne liste', tip: 'number', imeKontrole: 'sifraKursneListe', table: KursnaLista, roditeljskaKolona: 'id' },
+    { labela: 'Sifra Osnovne valute', tip: 'number', imeKontrole: 'sifraOsnovneValute', table: Valuta, roditeljskaKolona: 'id' },
+    { labela: 'Sifra prema valuti', tip: 'number', imeKontrole: 'sifraPremaValuti', table: Valuta, roditeljskaKolona: 'id' }
+  ],
+  modelForme: {
+    id: [null, [Validators.required, Validators.maxLength(9)]],
+    kupovni: [null, [Validators.required, Validators.maxLength(17)]],
+    prodajni: [null, [Validators.required, Validators.maxLength(17)]],
+    sifraKursneListe: [null, Validators.required],
+    sifraOsnovneValute: [null, Validators.required],
+    sifraPremaValuti: [null, Validators.required],
+  }
+};
+
+const VrstaPlacanja: TableInfo = {
+  kolone: ['Id vrste placanja', 'Naziv'],
+  atributi: ['id', 'naziv'],
+  naslov: 'Vrste placanja',
+  podaciUrl: environment.hostUrl + '/api/vrstaPlacanja',
+  prikazForme: [
+    { labela: 'Id vrste placanja', tip: 'number', imeKontrole: 'id' },
+    { labela: 'Naziv vrste placanja', tip: 'text', imeKontrole: 'naziv' },
+  ],
+  modelForme: {
+    id: [null, [Validators.required, Validators.maxLength(3)]],
+    naziv: [null, Validators.required],
+  }
+};
+
 export const TableRoutes: TableRoute[] = [
   { ruta: 'drzave', labela: 'Drzave', data: Drzava },
   { ruta: 'valute', labela: 'Valute', data: Valuta },
@@ -222,5 +260,7 @@ export const TableRoutes: TableRoute[] = [
   { ruta: 'fizickaLica', labela: 'Fizicka Lica', data: FizickoLice },
   { ruta: 'pravnaLica', labela: 'Pravna Lica', data: PravnoLice },
   { ruta: 'racuni', labela: 'Racuni', data: Racun },
-  { ruta: 'kursnaLista', labela: 'Kursne liste', data: KursnaLista }
+  { ruta: 'kursnaLista', labela: 'Kursne liste', data: KursnaLista },
+  { ruta: 'kursevi', labela: 'Kursevi u valuti', data: KursUValuti },
+  { ruta: 'vrstePlacanja', labela: 'Vrste Placanja', data: VrstaPlacanja}
 ];

@@ -40,7 +40,17 @@ public class Kurs {
 	private Valuta premaValuti;
 
 	public Kurs() {
-
+		
+	}
+	
+	public Kurs(BigDecimal id,BigDecimal kupovni, BigDecimal srednji, BigDecimal prodajni, KursnaLista kursnaLista, Valuta osnovnaValuta, Valuta premaValuti) {
+		this.id = id;
+		this.kupovni = kupovni;
+		this.prodajni = prodajni;
+		this.srednji = srednji;
+		this.kursnaLista = kursnaLista;
+		this.osnovnaValuta = osnovnaValuta;
+		this.premaValuti = premaValuti;
 	}
 
 	public BigDecimal getId() {

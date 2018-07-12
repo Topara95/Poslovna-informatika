@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import rs.ftn.poslovna.dto.VrstaPlacanjaDto;
+
 @Entity
 public class VrstaPlacanja {
 
@@ -16,6 +18,11 @@ public class VrstaPlacanja {
 
 	public VrstaPlacanja() {
 
+	}
+	
+	public VrstaPlacanja(VrstaPlacanjaDto vrstaPlacanjaDto) {
+		this.id = vrstaPlacanjaDto.getId();
+		this.naziv = vrstaPlacanjaDto.getNaziv();
 	}
 
 	public short getId() {
