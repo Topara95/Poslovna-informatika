@@ -19,7 +19,8 @@ const Drzava: TableInfo = {
     { labela: 'Naseljeno mesto', ruta: '/naseljenaMesta' },
     { labela: 'Valuta', ruta: '/valute' },
     { labela: 'Fizicko lice', ruta: '/fizickaLica' }
-  ]
+  ],
+  mozeUnos: true
 };
 
 const Valuta: TableInfo = {
@@ -41,7 +42,8 @@ const Valuta: TableInfo = {
   },
   preci: [
     { labela: 'Drzave', ruta: '/drzave' },
-  ]
+  ],
+  mozeUnos: true
 };
 
 const NaseljenoMesto: TableInfo = {
@@ -65,7 +67,8 @@ const NaseljenoMesto: TableInfo = {
   potomci: [
     { labela: 'Fizicko lice', ruta: '/fizickaLica' },
     { labela: 'Pravna lica', ruta: '/pravnaLica' }
-  ]
+  ],
+  mozeUnos: true
 };
 
 const AtributiBanke: TableInfo = {
@@ -83,7 +86,8 @@ const AtributiBanke: TableInfo = {
   },
   potomci: [
     { labela: 'Pravna lica', ruta: '/pravnaLica' }
-  ]
+  ],
+  mozeUnos: true
 };
 
 const FizickoLice: TableInfo = {
@@ -112,7 +116,8 @@ const FizickoLice: TableInfo = {
   preci: [
     { labela: 'Drzave', ruta: '/drzave' },
     { labela: 'Naseljena mesta', ruta: '/naseljenaMesta' }
-  ]
+  ],
+  mozeUnos: true
 };
 
 const PravnoLice: TableInfo = {
@@ -153,7 +158,8 @@ const PravnoLice: TableInfo = {
   preci: [
     { labela: 'Atributi banke', ruta: '/atributiBanaka' },
     { labela: 'Naseljena mesta', ruta: '/naseljenaMesta' }
-  ]
+  ],
+  mozeUnos: true
 };
 
 const Banka: TableInfo = {
@@ -164,7 +170,8 @@ const Banka: TableInfo = {
   prikazForme: [
   ],
   modelForme: {
-  }
+  },
+  mozeUnos: false
 };
 
 const Lice: TableInfo = {
@@ -175,7 +182,8 @@ const Lice: TableInfo = {
   prikazForme: [
   ],
   modelForme: {
-  }
+  },
+  mozeUnos: false
 };
 
 const Racun: TableInfo = {
@@ -194,7 +202,8 @@ const Racun: TableInfo = {
     liceId: [null, Validators.required],
     bankaId: [null, Validators.required],
     valutaId: [null, Validators.required],
-  }
+  },
+  mozeUnos: true
 };
 
 const KursnaLista: TableInfo = {
@@ -211,7 +220,8 @@ const KursnaLista: TableInfo = {
     brojKursneListe: [null, [Validators.required, Validators.maxLength(3)]],
     datumVazenja: [null, Validators.required],
     sifraBanke: [null, Validators.required],
-  }
+  },
+  mozeUnos: true
 };
 
 const KursUValuti: TableInfo = {
@@ -234,7 +244,8 @@ const KursUValuti: TableInfo = {
     sifraKursneListe: [null, Validators.required],
     sifraOsnovneValute: [null, Validators.required],
     sifraPremaValuti: [null, Validators.required],
-  }
+  },
+  mozeUnos: true
 };
 
 const VrstaPlacanja: TableInfo = {
@@ -249,7 +260,119 @@ const VrstaPlacanja: TableInfo = {
   modelForme: {
     id: [null, [Validators.required, Validators.maxLength(3)]],
     naziv: [null, Validators.required],
-  }
+  },
+  mozeUnos: true
+};
+
+const DnevnoStanjeRacuna: TableInfo = {
+  kolone: ['Id stanja', 'Datum prometa', 'Prethodno stanje', 'Promet u korist', 'Promet na teret', 'Novo stanje', 'Id racuna'],
+  atributi: ['id', 'datumPrometa', 'prethodnoStanje', 'prometUKorist', 'prometNaTeret', 'novoStanje', 'racunId'],
+  naslov: 'Dnevna stanja',
+  podaciUrl: environment.hostUrl + '/api/dnevnaStanjaRacuna',
+  prikazForme: [
+  ],
+  modelForme: {
+  },
+  mozeUnos: false
+};
+
+const MedjubankarskiNalog: TableInfo = {
+  kolone: ['Id naloga',
+    'Ukupan iznos',
+    'Id valute',
+    'Datum valute',
+    'Datum',
+    'Tip naloga',
+    'Id racuna banke duznika', 'Id racuna banke poverioca'],
+  atributi: ['id', 'ukupanIznos', 'valutaId', 'datumValute', 'datum', 'tip', 'racunBankeDuznikaId', 'racunBankePoveriocaId'],
+  naslov: 'Medjubankarski nalozi',
+  podaciUrl: environment.hostUrl + '/api/medjubankarskiNalozi',
+  prikazForme: [
+  ],
+  modelForme: {
+  },
+  mozeUnos: false
+};
+
+const AnalitikaIzvoda: TableInfo = {
+  kolone: ['Id analitike izvoda',
+          'Duznik/Nalogodavac',
+          'Svrha placanja',
+          'Poverilac/Primalac',
+          'Datum prijema',
+          'Datum valute',
+          'Racun duznika',
+          'Model zaduzenja',
+          'Poziv na broj zaduzenja',
+          'Racun poverioca',
+          'Model odobrenja',
+          'Poziv na broj odobrenja',
+          'Hitno',
+          'Iznos',
+          'Tip greske',
+          'Status',
+          'Id valute',
+          'Id naseljenog mesta',
+          'Id vrste placanja',
+          'Id dnevnog stanja'
+        ],
+  atributi: [
+              'id',
+              'duznikNalogodavac',
+              'svrhaPlacanja',
+              'poverilacPrimalac',
+              'datumPrijema',
+              'datumValute',
+              'racunDuznika',
+              'modelZaduzenja',
+              'pozivNaBrojZaduzenja',
+              'racunPoverioca',
+              'modelOdobrenja',
+              'pozivNaBrojOdobrenja',
+              'hitno',
+              'iznos',
+              'tipGreske',
+              'status',
+              'valutaId',
+              'naseljenoMestoId',
+              'vrstaPlacanjaId',
+              'dnevnoStanjeId'
+            ],
+  naslov: 'Analitike izvoda',
+  podaciUrl: environment.hostUrl + '/api/analitika',
+  prikazForme: [
+    { labela: 'Duznik/Nalogodavac', tip: 'text', imeKontrole: 'duznikNalogodavac' },
+    { labela: 'Svrha placanja', tip: 'text', imeKontrole: 'svrhaPlacanja' },
+    { labela: 'Poverilac/Primalac', tip: 'text', imeKontrole: 'poverilacPrimalac' },
+    { labela: 'Racun duznika', tip: 'text', imeKontrole: 'racunDuznika', table: Racun, roditeljskaKolona: 'brojRacuna' },
+    { labela: 'Model zaduzenja', tip: 'number', imeKontrole: 'modelZaduzenja' },
+    { labela: 'Poziv na broj zaduzenja', tip: 'text', imeKontrole: 'pozivNaBrojZaduzenja' },
+    { labela: 'Racun poverioca', tip: 'text', imeKontrole: 'racunPoverioca', table: Racun, roditeljskaKolona: 'brojRacuna' },
+    { labela: 'Model odobrenja', tip: 'number', imeKontrole: 'modelOdobrenja' },
+    { labela: 'Poziv na broj odobrenja', tip: 'text', imeKontrole: 'pozivNaBrojOdobrenja' },
+    { labela: 'Hitno', tip: 'checkbox', imeKontrole: 'hitno' },
+    { labela: 'Iznos', tip: 'number', imeKontrole: 'iznos' },
+    { labela: 'Valuta', tip: 'number', imeKontrole: 'valutaId', table: Valuta, roditeljskaKolona: 'id' },
+    { labela: 'Naseljeno mesto', tip: 'number', imeKontrole: 'naseljenoMestoId', table: NaseljenoMesto, roditeljskaKolona: 'id' },
+    { labela: 'Vrsta placanja', tip: 'number', imeKontrole: 'vrstaPlacanjaId', table: VrstaPlacanja, roditeljskaKolona: 'id' }
+  ],
+  modelForme: {
+    duznikNalogodavac: [null, [Validators.required, Validators.maxLength(256)]],
+    svrhaPlacanja: [null, [Validators.required, Validators.maxLength(256)]],
+    poverilacPrimalac: [null, [Validators.required, Validators.maxLength(256)]],
+    racunDuznika: [null, [Validators.minLength(18), Validators.maxLength(18)]],
+    modelZaduzenja: [null, Validators.maxLength(2)],
+    pozivNaBrojZaduzenja: [null, [Validators.maxLength(20)]],
+    racunPoverioca: [null, [Validators.minLength(18), Validators.maxLength(18)]],
+    modelOdobrenja: [null, Validators.maxLength(2)],
+    pozivNaBrojOdobrenja: [null, Validators.maxLength(20)],
+    hitno: [false, Validators.required],
+    iznos: [null, [Validators.required, Validators.maxLength(15)]],
+    valutaId: [null],
+    naseljenoMestoId: [null],
+    vrstaPlacanjaId: [null]
+  },
+  mozeUnos: true
 };
 
 export const TableRoutes: TableRoute[] = [
@@ -262,5 +385,8 @@ export const TableRoutes: TableRoute[] = [
   { ruta: 'racuni', labela: 'Racuni', data: Racun },
   { ruta: 'kursnaLista', labela: 'Kursne liste', data: KursnaLista },
   { ruta: 'kursevi', labela: 'Kursevi u valuti', data: KursUValuti },
-  { ruta: 'vrstePlacanja', labela: 'Vrste Placanja', data: VrstaPlacanja}
+  { ruta: 'vrstePlacanja', labela: 'Vrste Placanja', data: VrstaPlacanja},
+  { ruta: 'dnevnoStanjeRacuna', labela: 'Dnevno Stanje Racuna', data: DnevnoStanjeRacuna},
+  { ruta: 'medjubankarskiNalog', labela: 'Medjubankarski Nalozi', data: MedjubankarskiNalog},
+  { ruta: 'analitikaIzvoda', labela: 'Analitika izvoda', data: AnalitikaIzvoda}
 ];

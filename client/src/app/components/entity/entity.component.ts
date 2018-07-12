@@ -36,7 +36,11 @@ export class EntityComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.http.post<any>(this.tableInfo.podaciUrl, this.form.value)
-        .subscribe(drzava => this.podaci.push(drzava));
+        .subscribe(podatak => {
+          if (podatak) {
+            this.podaci.push(podatak);
+          }
+        });
     }
   }
 

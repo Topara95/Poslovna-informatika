@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +27,13 @@ public class AnalitikaIzvodaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> post(@RequestBody @Valid AnalitikaDto analitikaDto) {
-		AnalitikaDto added = analitikaIzvodaService.add(analitikaDto);
+	public void post(@RequestBody @Valid AnalitikaDto analitikaDto) {
+		analitikaIzvodaService.add(analitikaDto);
 
-		if (added == null) {
+		/*if (added == null) {
 			return ResponseEntity.badRequest().build();
 		} else {
 			return ResponseEntity.ok(added);
-		}
+		}*/
 	}
 }

@@ -63,10 +63,13 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 		}
 
 		if (racunPoverioca != null && racunDuznika == null) {
+			System.out.println("Uplata");
 			uplata(analitikaDto, racunPoverioca);
 		} else if (racunPoverioca != null && racunDuznika != null) {
+			System.out.println("Medjubankarski transfer");
 			medjubankarskiTransfer(analitikaDto, racunDuznika, racunPoverioca);
 		} else {
+			System.out.println("Greska");
 			greska(analitikaDto);
 		}
 
@@ -128,7 +131,7 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 			medjubankarskiNalog.setRacunBankeDuznika(racunBankeDuznika);
 			medjubankarskiNalog.setRacunBankePoverioca(racunBankePoverioca);
 			medjubankarskiNalog.setUkupanIznos(analitikaDto.getIznos());
-			medjubankarskiNalog.setValuta(valutaRepository.getOne(analitikaDto.getValutaId()));
+			medjubankarskiNalog.setValuta(valutaRepository.findById(analitikaDto.getValutaId()).orElse(null));
 			
 			// Sa jednog racuna banke se doda a sa drugog skine
 			DnevnoStanjeRacuna novoDnevnoStanjeBankeDuznika = getNovoDnevnoStanjeDuznika(analitikaDto, racunBankeDuznika);
@@ -186,11 +189,16 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 		analitikaIzvoda.setDuznikNalogodavac(analitikaDto.getDuznikNalogodavac());
 		analitikaIzvoda.setHitno(analitikaDto.isHitno());
 		analitikaIzvoda.setIznos(analitikaDto.getIznos());
-		analitikaIzvoda.setModelOdobrenja(analitikaDto.getModelOdobrenja().shortValue());
-		analitikaIzvoda.setModelZaduzenja(analitikaDto.getModelZaduzenja().shortValue());
-		analitikaIzvoda.setNaseljenoMesto(naseljenaMestaRepository.getOne(analitikaDto.getNaseljenoMestoId()));
-		analitikaIzvoda.setValuta(valutaRepository.getOne(analitikaDto.getValutaId()));
-		analitikaIzvoda.setVrstaPlacanja(vrstaPlacanjaRepository.getOne(analitikaDto.getVrstaPlacanjaId()));
+		if(analitikaDto.getModelOdobrenja()!=null)
+			analitikaIzvoda.setModelOdobrenja(analitikaDto.getModelOdobrenja().shortValue());
+		if(analitikaDto.getModelZaduzenja()!=null)
+			analitikaIzvoda.setModelZaduzenja(analitikaDto.getModelZaduzenja().shortValue());
+		if(analitikaDto.getNaseljenoMestoId()!=null)
+			analitikaIzvoda.setNaseljenoMesto(naseljenaMestaRepository.getOne(analitikaDto.getNaseljenoMestoId()));
+		if(analitikaDto.getValutaId()!=null)
+			analitikaIzvoda.setValuta(valutaRepository.getOne(analitikaDto.getValutaId()));
+		if(analitikaDto.getVrstaPlacanjaId()!=null)
+			analitikaIzvoda.setVrstaPlacanja(vrstaPlacanjaRepository.getOne(analitikaDto.getVrstaPlacanjaId()));
 		analitikaIzvoda.setPoverilacPrimalac(analitikaDto.getPoverilacPrimalac());
 		analitikaIzvoda.setPozivNaBrojOdobrenja(analitikaDto.getPozivNaBrojOdobrenja());
 		analitikaIzvoda.setPozivNaBrojZaduzenja(analitikaDto.getPozivNaBrojZaduzenja());
@@ -213,20 +221,21 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 		novoDnevnoStanjeDuznika.setPrometUKorist(new BigDecimal(0));
 		novoDnevnoStanjeDuznika.setNovoStanje(dnevnoStanjeDuznika.getNovoStanje().subtract(analitikaDto.getIznos()));
 
+		novoDnevnoStanjeDuznika.setRacun(racunDuznika);
 		return novoDnevnoStanjeDuznika;
 	}
 
 	private DnevnoStanjeRacuna getNovoDnevnoStanjePoverioca(AnalitikaDto analitikaDto, Racun racunPoverioca) {
 		DnevnoStanjeRacuna dnevnoStanjePoverioca = dnevnoStanjeRepository.findFirstByRacunOrderByIdDesc(racunPoverioca);
-
+		System.out.println(dnevnoStanjePoverioca.getId());
 		DnevnoStanjeRacuna novoDnevnoStanjePoverioca = new DnevnoStanjeRacuna();
 		novoDnevnoStanjePoverioca.setDatumPromenta(new Date());
 		novoDnevnoStanjePoverioca.setPrethodnoStanje(dnevnoStanjePoverioca.getNovoStanje());
 		novoDnevnoStanjePoverioca.setPrometUKorist(analitikaDto.getIznos());
 		novoDnevnoStanjePoverioca.setPrometNaTeret(new BigDecimal(0));
 		novoDnevnoStanjePoverioca.setNovoStanje(dnevnoStanjePoverioca.getNovoStanje().add(analitikaDto.getIznos()));
-
-		return dnevnoStanjePoverioca;
+		novoDnevnoStanjePoverioca.setRacun(racunPoverioca);
+		return novoDnevnoStanjePoverioca;
 	}
 
 }

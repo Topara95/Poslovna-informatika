@@ -9,7 +9,7 @@
 
 <h1>{{ tableInfo.naslov }}</h1>
 
-<mat-card>
+<mat-card *ngIf="tableInfo.mozeUnos">
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-container *ngFor="let prikaz of tableInfo.prikazForme">

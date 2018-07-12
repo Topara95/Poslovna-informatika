@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +14,7 @@ import rs.ftn.poslovna.domain.AnalitikaIzvoda;
 public class AnalitikaDto {
 
 	// nece unositi
-	private int id;
+	private long id;
 
 	@NotNull
 	@Size(max = 256)
@@ -37,28 +36,17 @@ public class AnalitikaDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd")
 	private Date datumValute;
 
-	@NotBlank
-	@Size(min = 18, max = 18)
+	
 	private String racunDuznika;
 
-	@NotNull
-	@Digits(integer = 2, fraction = 0)
 	private BigDecimal modelZaduzenja;
 
-	@NotBlank
-	@Size(max = 20)
 	private String pozivNaBrojZaduzenja;
 
-	@NotBlank
-	@Size(min = 18, max = 18)
 	private String racunPoverioca;
 
-	@NotNull
-	@Digits(integer = 2, fraction = 0)
 	private BigDecimal modelOdobrenja;
 
-	@NotBlank
-	@Size(max = 20)
 	private String pozivNaBrojOdobrenja;
 
 	private boolean hitno;
@@ -66,7 +54,7 @@ public class AnalitikaDto {
 	@NotNull
 	@Digits(integer = 15, fraction = 2)
 	private BigDecimal iznos;
-
+	
 	private int tipGreske;
 
 	private String status;
@@ -85,10 +73,33 @@ public class AnalitikaDto {
 	}
 
 	public AnalitikaDto(AnalitikaIzvoda analitika) {
-		// dopuni...
+		this.id = analitika.getId();
+		this.duznikNalogodavac = analitika.getDuznikNalogodavac();
+		this.svrhaPlacanja = analitika.getSvrhaPlacanja();
+		this.poverilacPrimalac = analitika.getPoverilacPrimalac();
+		this.datumPrijema = analitika.getDatumPrijema();
+		this.datumValute = analitika.getDatumValute();
+		this.racunDuznika = analitika.getRacunDuznika();
+		this.modelZaduzenja = new BigDecimal(analitika.getModelZaduzenja());
+		this.pozivNaBrojZaduzenja = analitika.getPozivNaBrojZaduzenja();
+		this.racunPoverioca = analitika.getRacunPoverioca();
+		this.modelOdobrenja = new BigDecimal(analitika.getModelOdobrenja());
+		this.pozivNaBrojOdobrenja = analitika.getPozivNaBrojOdobrenja();
+		this.hitno = analitika.isHitno();
+		this.iznos = analitika.getIznos();
+		this.tipGreske = analitika.getTipGreske();
+		this.status = analitika.getStatus();
+		if(analitika.getValuta()!= null)
+			this.valutaId = analitika.getValuta().getId();
+		if(analitika.getNaseljenoMesto()!=null)
+			this.naseljenoMestoId = analitika.getNaseljenoMesto().getId();
+		if(analitika.getVrstaPlacanja()!=null)
+			this.vrstaPlacanjaId = analitika.getVrstaPlacanja().getId();
+		if(analitika.getStanjeRacuna()!=null)
+			this.dnevnoStanjeId = analitika.getStanjeRacuna().getId();
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -224,11 +235,11 @@ public class AnalitikaDto {
 		this.valutaId = valutaId;
 	}
 
-	public short getVrstaPlacanjaId() {
+	public Short getVrstaPlacanjaId() {
 		return vrstaPlacanjaId;
 	}
 
-	public void setVrstaPlacanjaId(short vrstaPlacanjaId) {
+	public void setVrstaPlacanjaId(Short vrstaPlacanjaId) {
 		this.vrstaPlacanjaId = vrstaPlacanjaId;
 	}
 

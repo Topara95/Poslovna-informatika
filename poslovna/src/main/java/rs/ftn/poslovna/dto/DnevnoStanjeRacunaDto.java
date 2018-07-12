@@ -12,7 +12,7 @@ public class DnevnoStanjeRacunaDto {
 	
 	private long id;
 	
-	private Date datumPromenta;
+	private Date datumPrometa;
 	
 	@NotNull
 	@Digits(integer = 15, fraction = 2)
@@ -38,7 +38,7 @@ public class DnevnoStanjeRacunaDto {
 	
 	public DnevnoStanjeRacunaDto(DnevnoStanjeRacuna dsr) {
 		this.id = dsr.getId();
-		this.datumPromenta = dsr.getDatumPromenta();
+		this.datumPrometa = dsr.getDatumPromenta();
 		this.prethodnoStanje = dsr.getPrethodnoStanje();
 		this.prometUKorist = dsr.getPrometUKorist();
 		this.prometNaTeret = dsr.getPrometNaTeret();
@@ -54,12 +54,12 @@ public class DnevnoStanjeRacunaDto {
 		this.id = id;
 	}
 
-	public Date getDatumPromenta() {
-		return datumPromenta;
+	public Date getDatumPrometa() {
+		return datumPrometa;
 	}
 
-	public void setDatumPromenta(Date datumPromenta) {
-		this.datumPromenta = datumPromenta;
+	public void setDatumPrometa(Date datumPrometa) {
+		this.datumPrometa = datumPrometa;
 	}
 
 	public BigDecimal getPrethodnoStanje() {

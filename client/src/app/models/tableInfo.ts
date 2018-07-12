@@ -13,6 +13,7 @@ export interface TableInfo {
   modelForme: any;
   potomci?: Relacija[];
   preci?: Relacija[];
+  mozeUnos: boolean;
 }
 
 export interface FormaView {
