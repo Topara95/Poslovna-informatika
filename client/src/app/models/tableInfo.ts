@@ -14,6 +14,8 @@ export interface TableInfo {
   potomci?: Relacija[];
   preci?: Relacija[];
   mozeUnos: boolean;
+  export?: (element: any) => string;
+  import?: () => string;
 }
 
 export interface FormaView {

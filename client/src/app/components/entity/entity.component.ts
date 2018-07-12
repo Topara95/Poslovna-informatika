@@ -33,6 +33,26 @@ export class EntityComponent implements OnInit {
     });
   }
 
+  exportUrl(): string {
+    if (this.tableInfo.export === undefined) {
+      return null;
+    }
+
+    if (this.highlighted !== -1 && this.tableInfo.export !== undefined) {
+      return this.tableInfo.export(this.podaci[this.highlighted]);
+    }
+
+    return null;
+  }
+
+  importUrl(): string {
+    if (this.tableInfo.import !== undefined) {
+      return this.tableInfo.import();
+    }
+
+    return null;
+  }
+
   onSubmit() {
     if (this.form.valid) {
       this.http.post<any>(this.tableInfo.podaciUrl, this.form.value)

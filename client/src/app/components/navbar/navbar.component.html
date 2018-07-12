@@ -23,10 +23,20 @@
     Preci
   </button>
 
-  <button *ngIf="potomci" mat-button [matMenuTriggerFor]="potomciMenu">
-      <mat-icon>near_me</mat-icon>
-    Potomci
+  <button *ngIf="preci" mat-button [matMenuTriggerFor]="preciMenu">
+    <mat-icon>near_me</mat-icon>
+    Preci
   </button>
+
+  <a *ngIf="export" mat-button [href]="export" matTooltip="Eksportuj xml">
+    <mat-icon>cloud_download</mat-icon>
+  </a>
+
+  <button *ngIf="import" mat-button matTooltip="Importuj xml" (click)="fileInput.click()">
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+
+  <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)"/>
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
@@ -39,7 +49,7 @@
     <button mat-menu-item *ngFor="let predak of preci" [routerLink]="[predak.ruta]">
       <span>{{ predak.labela }}</span>
     </button>
-  </mat-menu>
+</mat-menu>
 
 <mat-menu #potomciMenu="matMenu">
   <button mat-menu-item *ngFor="let potomak of potomci" [routerLink]="[potomak.ruta]">

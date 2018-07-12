@@ -47,7 +47,20 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 
 	@Autowired
 	private RacunRepository racunRepository;
+	
 
+	@Override
+	public AnalitikaDto getOne(long id) {
+		AnalitikaIzvoda analitikaIzvoda = analatikaIzvodaRepository.getOne(id);
+		
+		if (analitikaIzvoda == null) {			
+			return null;
+		} else {
+			return new AnalitikaDto(analitikaIzvoda);
+		}
+	}
+
+	
 	@Override
 	public List<AnalitikaDto> getAll() {
 		return analatikaIzvodaRepository.findAll().stream().map(AnalitikaDto::new).collect(Collectors.toList());

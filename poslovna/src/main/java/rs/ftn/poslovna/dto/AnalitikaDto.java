@@ -6,14 +6,20 @@ import java.util.Date;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import rs.ftn.poslovna.domain.AnalitikaIzvoda;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AnalitikaDto {
 
-	// nece unositi
+	@XmlAttribute(name = "id")
 	private long id;
 
 	@NotNull

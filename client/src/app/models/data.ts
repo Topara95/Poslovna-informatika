@@ -372,7 +372,9 @@ const AnalitikaIzvoda: TableInfo = {
     naseljenoMestoId: [null],
     vrstaPlacanjaId: [null]
   },
-  mozeUnos: true
+  mozeUnos: true,
+  export: (element: any) => `${environment.hostUrl}/api/analitika/${element.id}`,
+  import: () => `${environment.hostUrl}/api/analitika/xml`
 };
 
 export const TableRoutes: TableRoute[] = [

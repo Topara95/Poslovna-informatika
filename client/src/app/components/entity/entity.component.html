@@ -5,6 +5,8 @@
   (last)="onLast()"
   [preci]="tableInfo.preci"
   [potomci]="tableInfo.potomci"
+  [export]="exportUrl()"
+  [import]="importUrl()"
 ></app-navbar>
 
 <h1>{{ tableInfo.naslov }}</h1>
@@ -45,6 +47,8 @@
     </form>
   </mat-card-content>
 </mat-card>
+
+<a *ngIf="highlighted !== -1" href="{{ tableInfo.export(podaci[highlighted]) }}">Export analitika xml</a>
 
 <app-table
   [tableInfo]="tableInfo"
