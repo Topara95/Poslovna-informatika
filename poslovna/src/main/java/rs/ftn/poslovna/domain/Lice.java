@@ -32,7 +32,7 @@ public abstract class Lice {
 	protected NaseljenoMesto naseljenoMesto;
 
 	@OneToMany(mappedBy = "lice", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	protected List<Racun> racun;
+	protected List<Racun> svojiRacuni;
 
 	public Lice() {
 
@@ -62,12 +62,12 @@ public abstract class Lice {
 		this.naseljenoMesto = naseljenoMesto;
 	}
 
-	public List<Racun> getRacun() {
-		return racun;
+	public List<Racun> getSvojiRacuni() {
+		return svojiRacuni;
 	}
 
-	public void setRacun(List<Racun> racun) {
-		this.racun = racun;
+	public void setSvojiRacuni(List<Racun> racun) {
+		this.svojiRacuni = racun;
 	}
 
 }

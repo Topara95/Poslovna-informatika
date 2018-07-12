@@ -47,6 +47,15 @@ public class DnevnoStanjeRacuna {
 
 	}
 
+	public DnevnoStanjeRacuna(BigDecimal prethodnoStanje, BigDecimal prometUKorist, BigDecimal prometNaTeret,
+			BigDecimal novoStanje, Racun racun) {
+		this.prethodnoStanje = prethodnoStanje;
+		this.prometUKorist = prometUKorist;
+		this.prometNaTeret = prometNaTeret;
+		this.novoStanje = novoStanje;
+		this.racun = racun;
+	}
+
 	public long getId() {
 		return id;
 	}

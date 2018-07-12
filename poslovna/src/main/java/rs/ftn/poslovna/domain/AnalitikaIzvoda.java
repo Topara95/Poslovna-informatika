@@ -2,6 +2,7 @@ package rs.ftn.poslovna.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -69,8 +71,8 @@ public class AnalitikaIzvoda {
 	@Column(columnDefinition = "CHAR(1)", nullable = true)
 	private String status;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "ID_STANJA", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "ID_STANJA", nullable = true)
 	private DnevnoStanjeRacuna stanjeRacuna;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -84,10 +86,10 @@ public class AnalitikaIzvoda {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "ID_VALUTE", nullable = true)
 	private Valuta valuta;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="NALOG_ID", nullable = false)
-	private MedjubankarskiNalog medjubankarskiNalog;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "NALOG_ID", nullable = false)
+	private Set<MedjubankarskiNalog> medjubankarskiNalozi;
 
 	public AnalitikaIzvoda() {
 	}
@@ -252,12 +254,12 @@ public class AnalitikaIzvoda {
 		this.valuta = valuta;
 	}
 
-	public MedjubankarskiNalog getMedjubankarskiNalog() {
-		return medjubankarskiNalog;
+	public Set<MedjubankarskiNalog> getMedjubankarskiNalog() {
+		return medjubankarskiNalozi;
 	}
 
-	public void setMedjubankarskiNalog(MedjubankarskiNalog medjubankarskiNalog) {
-		this.medjubankarskiNalog = medjubankarskiNalog;
+	public void setMedjubankarskiNalog(Set<MedjubankarskiNalog> medjubankarskiNalozi) {
+		this.medjubankarskiNalozi = medjubankarskiNalozi;
 	}
 
 }
