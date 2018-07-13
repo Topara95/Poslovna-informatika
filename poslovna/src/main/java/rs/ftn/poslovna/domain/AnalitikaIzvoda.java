@@ -87,8 +87,7 @@ public class AnalitikaIzvoda {
 	@JoinColumn(name = "ID_VALUTE", nullable = true)
 	private Valuta valuta;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "NALOG_ID", nullable = false)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "analitikeIzvoda")
 	private Set<MedjubankarskiNalog> medjubankarskiNalozi;
 
 	public AnalitikaIzvoda() {

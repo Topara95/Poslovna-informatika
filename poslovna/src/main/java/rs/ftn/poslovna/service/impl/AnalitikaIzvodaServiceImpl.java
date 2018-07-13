@@ -1,9 +1,12 @@
 package rs.ftn.poslovna.service.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,7 +147,8 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 			medjubankarskiNalog.setRacunBankeDuznika(racunBankeDuznika);
 			medjubankarskiNalog.setRacunBankePoverioca(racunBankePoverioca);
 			medjubankarskiNalog.setUkupanIznos(analitikaDto.getIznos());
-			medjubankarskiNalog.setValuta(valutaRepository.findById(analitikaDto.getValutaId()).orElse(null));
+			if (analitikaDto.getValutaId() != null)
+				medjubankarskiNalog.setValuta(valutaRepository.findById(analitikaDto.getValutaId()).orElse(null));
 			
 			// Sa jednog racuna banke se doda a sa drugog skine
 			DnevnoStanjeRacuna novoDnevnoStanjeBankeDuznika = getNovoDnevnoStanjeDuznika(analitikaDto, racunBankeDuznika);
@@ -176,16 +180,23 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 					opetPonovnoDnevnoStanjeBankePoverioca
 				));
 			
-			medjubankarskiNalogRepository.save(medjubankarskiNalog);
+//			medjubankarskiNalogRepository.save(medjubankarskiNalog);
 			
 			AnalitikaIzvoda analitikaIzvodaDuznika = getAnalitikaIzvoda(analitikaDto, novoDnevnoStanjeDuznika, (short) 1);
 			AnalitikaIzvoda analitikaIzvodaPoverioca = getAnalitikaIzvoda(analitikaDto, novoDnevnoStanjePoverioca, (short) 1);
+
+			Set<AnalitikaIzvoda> analitikeIzvoda = new HashSet<>();
+			analitikeIzvoda.add(analitikaIzvodaDuznika);
+			analitikeIzvoda.add(analitikaIzvodaPoverioca);
+			medjubankarskiNalog.setAnalitikeIzvoda(analitikeIzvoda);
 			
 			// Sacuvamo to opet
 			analatikaIzvodaRepository.saveAll(Arrays.asList(
 					analitikaIzvodaDuznika,
 					analitikaIzvodaPoverioca
 				));
+			
+			medjubankarskiNalogRepository.save(medjubankarskiNalog);
 		}
 	}
 
@@ -227,27 +238,58 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 	private DnevnoStanjeRacuna getNovoDnevnoStanjeDuznika(AnalitikaDto analitikaDto, Racun racunDuznika) {
 		DnevnoStanjeRacuna dnevnoStanjeDuznika = dnevnoStanjeRepository.findFirstByRacunOrderByIdDesc(racunDuznika);
 
-		DnevnoStanjeRacuna novoDnevnoStanjeDuznika = new DnevnoStanjeRacuna();
-		novoDnevnoStanjeDuznika.setDatumPromenta(new Date());
-		novoDnevnoStanjeDuznika.setPrethodnoStanje(dnevnoStanjeDuznika.getNovoStanje());
-		novoDnevnoStanjeDuznika.setPrometNaTeret(analitikaDto.getIznos());
-		novoDnevnoStanjeDuznika.setPrometUKorist(new BigDecimal(0));
+		DnevnoStanjeRacuna novoDnevnoStanjeDuznika;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String datumPrometa = sdf.format(dnevnoStanjeDuznika.getDatumPromenta());
+		String sadasnjiDatum = sdf.format(new Date());
+		
+		System.out.println("Datum prometa " + datumPrometa);
+		System.out.println("Sadasnji datum " + sadasnjiDatum);
+		
+		if (datumPrometa.equals(sadasnjiDatum)) {
+			novoDnevnoStanjeDuznika = dnevnoStanjeDuznika;
+			BigDecimal prometNaTeret = novoDnevnoStanjeDuznika.getPrometNaTeret().add(analitikaDto.getIznos());
+			novoDnevnoStanjeDuznika.setPrometNaTeret(prometNaTeret);
+		} else {
+			novoDnevnoStanjeDuznika = new DnevnoStanjeRacuna();
+			novoDnevnoStanjeDuznika.setPrethodnoStanje(dnevnoStanjeDuznika.getNovoStanje());
+			novoDnevnoStanjeDuznika.setDatumPromenta(new Date());
+			novoDnevnoStanjeDuznika.setPrometNaTeret(analitikaDto.getIznos());
+			novoDnevnoStanjeDuznika.setPrometUKorist(new BigDecimal(0));
+		}
+							
 		novoDnevnoStanjeDuznika.setNovoStanje(dnevnoStanjeDuznika.getNovoStanje().subtract(analitikaDto.getIznos()));
-
 		novoDnevnoStanjeDuznika.setRacun(racunDuznika);
+		
 		return novoDnevnoStanjeDuznika;
 	}
 
 	private DnevnoStanjeRacuna getNovoDnevnoStanjePoverioca(AnalitikaDto analitikaDto, Racun racunPoverioca) {
 		DnevnoStanjeRacuna dnevnoStanjePoverioca = dnevnoStanjeRepository.findFirstByRacunOrderByIdDesc(racunPoverioca);
-		System.out.println(dnevnoStanjePoverioca.getId());
-		DnevnoStanjeRacuna novoDnevnoStanjePoverioca = new DnevnoStanjeRacuna();
-		novoDnevnoStanjePoverioca.setDatumPromenta(new Date());
-		novoDnevnoStanjePoverioca.setPrethodnoStanje(dnevnoStanjePoverioca.getNovoStanje());
-		novoDnevnoStanjePoverioca.setPrometUKorist(analitikaDto.getIznos());
-		novoDnevnoStanjePoverioca.setPrometNaTeret(new BigDecimal(0));
+
+		DnevnoStanjeRacuna novoDnevnoStanjePoverioca;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String datumPrometa = sdf.format(dnevnoStanjePoverioca.getDatumPromenta());
+		String sadasnjiDatum = sdf.format(new Date());
+		
+		System.out.println("Datum prometa " + datumPrometa);
+		System.out.println("Sadasnji datum" + sadasnjiDatum);
+		
+		if (datumPrometa.equals(sadasnjiDatum)) {
+			novoDnevnoStanjePoverioca = dnevnoStanjePoverioca;
+			BigDecimal prometUKorist = novoDnevnoStanjePoverioca.getPrometUKorist().add(analitikaDto.getIznos());		
+			novoDnevnoStanjePoverioca.setPrometUKorist(prometUKorist);
+		} else {
+			novoDnevnoStanjePoverioca = new DnevnoStanjeRacuna();
+			novoDnevnoStanjePoverioca.setPrethodnoStanje(dnevnoStanjePoverioca.getNovoStanje());
+			novoDnevnoStanjePoverioca.setDatumPromenta(new Date());	
+			novoDnevnoStanjePoverioca.setPrometUKorist(analitikaDto.getIznos());
+			novoDnevnoStanjePoverioca.setPrometNaTeret(new BigDecimal(0));
+		}
+					
 		novoDnevnoStanjePoverioca.setNovoStanje(dnevnoStanjePoverioca.getNovoStanje().add(analitikaDto.getIznos()));
 		novoDnevnoStanjePoverioca.setRacun(racunPoverioca);
+		
 		return novoDnevnoStanjePoverioca;
 	}
 
