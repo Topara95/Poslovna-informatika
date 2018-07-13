@@ -338,7 +338,8 @@ const MedjubankarskiNalog: TableInfo = {
     { labela: 'Racun', ruta: '/racuni' },
     { labela: 'Valuta', ruta: '/valute' }
   ],
-  mozeUnos: false
+  mozeUnos: false,
+  export: (element: any) => `${environment.hostUrl}/api/medjubankarskiNalozi/${element.id}`
 };
 
 const AnalitikaIzvoda: TableInfo = {
