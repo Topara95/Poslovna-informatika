@@ -458,6 +458,7 @@ export const TableRoutes: TableRoute[] = [
   { ruta: 'atributiBanaka', labela: 'Atributi banaka', data: AtributiBanke },
   { ruta: 'fizickaLica', labela: 'Fizicka Lica', data: FizickoLice },
   { ruta: 'pravnaLica', labela: 'Pravna Lica', data: PravnoLice },
+  { ruta: 'banke', labela: 'Banke', data: Banka },
   { ruta: 'racuni', labela: 'Racuni', data: Racun },
   { ruta: 'kursnaLista', labela: 'Kursne liste', data: KursnaLista },
   { ruta: 'kursevi', labela: 'Kursevi u valuti', data: KursUValuti },

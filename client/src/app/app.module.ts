@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { EntityComponent } from './components/entity/entity.component';
 import { TableComponent } from './components/table/table.component';
 import { ZoomTableComponent } from './components/zoom-table/zoom-table.component';
+import { IzvodKlijentaComponent } from './components/izvod-klijenta/izvod-klijenta.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ZoomTableComponent } from './components/zoom-table/zoom-table.component
     NavbarComponent,
     EntityComponent,
     TableComponent,
-    ZoomTableComponent
+    ZoomTableComponent,
+    IzvodKlijentaComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { ZoomTableComponent } from './components/zoom-table/zoom-table.component
     AppRoutingModule
   ],
   entryComponents: [
-    ZoomTableComponent
+    ZoomTableComponent,
+    IzvodKlijentaComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -107,4 +107,8 @@ export class EntityComponent implements OnInit {
     this.highlighted = this.podaci.length - 1;
   }
 
+  getId() {
+    return this.highlighted !== -1 ? this.podaci[this.highlighted].id : - 1;
+  }
+
 }

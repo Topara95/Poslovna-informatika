@@ -32,11 +32,20 @@
     <mat-icon>cloud_download</mat-icon>
   </a>
 
+  <a *ngIf="banka && highlighted !== -1" mat-button href="http://localhost:8081/api/lica/pravnalica/banke/{{ highlighted }}" matTooltip="Download pdf">
+    <mat-icon>cloud_download</mat-icon>
+  </a>
+
   <button *ngIf="import" mat-button matTooltip="Importuj xml" (click)="fileInput.click()">
     <mat-icon>cloud_upload</mat-icon>
   </button>
 
   <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)"/>
+
+  <button *ngIf="fizickaLica && highlighted !== -1" mat-button (click)="onPretraga()">
+    <mat-icon>search</mat-icon>
+    PDF
+  </button>
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">

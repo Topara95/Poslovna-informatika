@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker1" placeholder="Od" formControlName="od">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Do" formControlName="do">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <a *ngIf="form.valid" href="{{  getLinkZaPdf() }}" target="_blank">Skini pdf</a>
+</form>
