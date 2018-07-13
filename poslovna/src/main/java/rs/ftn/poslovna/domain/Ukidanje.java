@@ -35,6 +35,12 @@ public class Ukidanje {
 	@JoinColumn(name = "ID_RACUNA", nullable = false)
 	private Racun racun;
 	
+	public Ukidanje(String sredstvaSePrenoseNaRacun, Racun racun) {
+		this.sredstvaSePrenoseNaRacun = sredstvaSePrenoseNaRacun;
+		this.racun = racun;
+		this.datumUkidanja = new Date();
+	}
+	
 	public Ukidanje() {
 		
 	}

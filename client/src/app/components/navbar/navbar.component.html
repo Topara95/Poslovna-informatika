@@ -19,13 +19,13 @@
   </button>
 
   <button *ngIf="preci" mat-button [matMenuTriggerFor]="preciMenu">
-    <mat-icon>near_me</mat-icon>
+    <mat-icon>keyboard_arrow_up</mat-icon>
     Preci
   </button>
 
-  <button *ngIf="preci" mat-button [matMenuTriggerFor]="preciMenu">
-    <mat-icon>near_me</mat-icon>
-    Preci
+  <button *ngIf="potomci" mat-button [matMenuTriggerFor]="potomciMenu">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    Potomci
   </button>
 
   <a *ngIf="export" mat-button [href]="export" matTooltip="Eksportuj xml">

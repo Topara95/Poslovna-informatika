@@ -43,6 +43,12 @@ const Valuta: TableInfo = {
   preci: [
     { labela: 'Drzave', ruta: '/drzave' },
   ],
+  potomci: [
+    { labela: 'Kursevi', ruta: '/kursevi' },
+    { labela: 'Racuni', ruta: '/racuni' },
+    { labela: 'Analitike izvoda', ruta: '/analitikaIzvoda' },
+    { labela: 'Medjubankarski nalozi', ruta: '/medjubankarskiNalog' }
+  ],
   mozeUnos: true
 };
 
@@ -66,7 +72,8 @@ const NaseljenoMesto: TableInfo = {
   ],
   potomci: [
     { labela: 'Fizicko lice', ruta: '/fizickaLica' },
-    { labela: 'Pravna lica', ruta: '/pravnaLica' }
+    { labela: 'Pravna lica', ruta: '/pravnaLica' },
+    { labela: 'Analitike izvoda', ruta: '/analitikaIzvoda' }
   ],
   mozeUnos: true
 };
@@ -117,6 +124,9 @@ const FizickoLice: TableInfo = {
     { labela: 'Drzave', ruta: '/drzave' },
     { labela: 'Naseljena mesta', ruta: '/naseljenaMesta' }
   ],
+  potomci: [
+    { labela: 'Racuni', ruta: '/racuni' }
+  ],
   mozeUnos: true
 };
 
@@ -158,6 +168,10 @@ const PravnoLice: TableInfo = {
   preci: [
     { labela: 'Atributi banke', ruta: '/atributiBanaka' },
     { labela: 'Naseljena mesta', ruta: '/naseljenaMesta' }
+  ],
+  potomci: [
+    { labela: 'Racuni', ruta: '/racuni' },
+    { labela: 'Kursne Liste', ruta: '/kursnaLista' }
   ],
   mozeUnos: true
 };
@@ -203,6 +217,16 @@ const Racun: TableInfo = {
     bankaId: [null, Validators.required],
     valutaId: [null, Validators.required],
   },
+  preci: [
+    { labela: 'Valuta', ruta: '/valute' },
+    { labela: 'Pravno Lice', ruta: '/pravnaLica' },
+    { labela: 'Fizicko Lice', ruta: '/fizickaLica' }
+  ],
+  potomci: [
+    { labela: 'Medjubakarski nalog', ruta: '/medjubankarskiNalog' },
+    { labela: 'Ukidanje', ruta: '/pravnaLica' },
+    { labela: 'Dnevna stanja racuna', ruta: '/dnevnoStanjeRacuna' }
+  ],
   mozeUnos: true
 };
 
@@ -221,6 +245,12 @@ const KursnaLista: TableInfo = {
     datumVazenja: [null, Validators.required],
     sifraBanke: [null, Validators.required],
   },
+  preci: [
+    { labela: 'Pravno Lice', ruta: '/pravnaLica' }
+  ],
+  potomci: [
+    { labela: 'Kursevi', ruta: '/kursevi' }
+  ],
   mozeUnos: true
 };
 
@@ -245,6 +275,10 @@ const KursUValuti: TableInfo = {
     sifraOsnovneValute: [null, Validators.required],
     sifraPremaValuti: [null, Validators.required],
   },
+  preci: [
+    { labela: 'Kursna Lista', ruta: '/kursnaLista' },
+    { labela: 'Valuta', ruta: '/valute' }
+  ],
   mozeUnos: true
 };
 
@@ -261,6 +295,9 @@ const VrstaPlacanja: TableInfo = {
     id: [null, [Validators.required, Validators.maxLength(3)]],
     naziv: [null, Validators.required],
   },
+  potomci: [
+    { labela: 'Analitike izvoda', ruta: '/analitikaIzvoda' }
+  ],
   mozeUnos: true
 };
 
@@ -273,6 +310,12 @@ const DnevnoStanjeRacuna: TableInfo = {
   ],
   modelForme: {
   },
+  preci: [
+    { labela: 'Racun', ruta: '/racuni' }
+  ],
+  potomci: [
+    { labela: 'Analitike izvoda', ruta: '/analitikaIzvoda' }
+  ],
   mozeUnos: false
 };
 
@@ -291,6 +334,10 @@ const MedjubankarskiNalog: TableInfo = {
   ],
   modelForme: {
   },
+  preci: [
+    { labela: 'Racun', ruta: '/racuni' },
+    { labela: 'Valuta', ruta: '/valute' }
+  ],
   mozeUnos: false
 };
 
@@ -372,6 +419,12 @@ const AnalitikaIzvoda: TableInfo = {
     naseljenoMestoId: [null],
     vrstaPlacanjaId: [null]
   },
+  preci: [
+    { labela: 'Dnevno stanje racuna', ruta: '/dnevnoStanjeRacuna' },
+    { labela: 'Vrsta placanja', ruta: '/vrstePlacanja' },
+    { labela: 'Valuta', ruta: '/valute' },
+    { labela: 'Naseljeno mesto', ruta: '/naseljenaMesta' },
+  ],
   mozeUnos: true,
   export: (element: any) => `${environment.hostUrl}/api/analitika/${element.id}`,
   import: () => `${environment.hostUrl}/api/analitika/xml`
