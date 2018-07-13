@@ -201,7 +201,7 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 	}
 
 	private void greska(AnalitikaDto analitikaDto) {
-		analatikaIzvodaRepository.save(getAnalitikaIzvoda(analitikaDto, null, (short) 1));
+		analatikaIzvodaRepository.save(getAnalitikaIzvoda(analitikaDto, null, (short) 8));
 	}
 
 	private AnalitikaIzvoda getAnalitikaIzvoda(AnalitikaDto analitikaDto, DnevnoStanjeRacuna novoDnevnoStanjePoverioca,
