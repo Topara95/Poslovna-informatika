@@ -21,4 +21,9 @@ public class MedjubankarskiNalogServiceImpl implements MedjubankarskiNalogServic
 		return mnRepository.findAll().stream().map(MedjubankarskiNalogDto::new).collect(Collectors.toList());
 	}
 
+	@Override
+	public MedjubankarskiNalogDto getOne(int id) {
+		return new MedjubankarskiNalogDto(mnRepository.findById(id).get());
+	}
+
 }

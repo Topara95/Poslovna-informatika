@@ -237,7 +237,10 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 
 	private DnevnoStanjeRacuna getNovoDnevnoStanjeDuznika(AnalitikaDto analitikaDto, Racun racunDuznika) {
 		DnevnoStanjeRacuna dnevnoStanjeDuznika = dnevnoStanjeRepository.findFirstByRacunOrderByIdDesc(racunDuznika);
-
+		if (dnevnoStanjeDuznika==null) {
+			System.out.println("Ne ocitava dnevno stanje Duznika");
+		}
+		System.out.println("Id stanja: "+ dnevnoStanjeDuznika.getId());
 		DnevnoStanjeRacuna novoDnevnoStanjeDuznika;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		String datumPrometa = sdf.format(dnevnoStanjeDuznika.getDatumPromenta());

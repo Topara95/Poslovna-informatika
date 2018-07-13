@@ -7,9 +7,14 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import rs.ftn.poslovna.domain.MedjubankarskiNalog;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedjubankarskiNalogDto {
 	
 	private int id;
@@ -48,7 +53,7 @@ public class MedjubankarskiNalogDto {
 		this.racunBankeDuznikaId = mn.getRacunBankeDuznika().getId();
 		this.racunBankePoveriocaId = mn.getRacunBankePoverioca().getId();
 	}
-
+	
 	public int getId() {
 		return id;
 	}

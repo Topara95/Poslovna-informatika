@@ -291,7 +291,8 @@ const MedjubankarskiNalog: TableInfo = {
   ],
   modelForme: {
   },
-  mozeUnos: false
+  mozeUnos: false,
+  export: (element: any) => `${environment.hostUrl}/api/medjubankarskiNalozi/${element.id}`
 };
 
 const AnalitikaIzvoda: TableInfo = {
