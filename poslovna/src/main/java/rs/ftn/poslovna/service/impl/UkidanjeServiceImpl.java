@@ -50,8 +50,10 @@ public class UkidanjeServiceImpl implements UkidanjeService{
 		if (datumPrometaPrebacivanje.equals(sadasnjiDatum)) {
 			stanjePrebacivanje.setPrometUKorist(stanjePrebacivanje.getPrometUKorist().add(stanjeUkidanje.getNovoStanje()));
 			stanjePrebacivanje.setNovoStanje(stanjePrebacivanje.getNovoStanje().add(stanjeUkidanje.getNovoStanje()));
-			
+			stanjeUkidanje.setPrometNaTeret(stanjeUkidanje.getNovoStanje());
+			stanjeUkidanje.setNovoStanje(stanjeUkidanje.getNovoStanje().subtract(stanjeUkidanje.getNovoStanje()));
 			dsrRepository.save(stanjePrebacivanje);
+			dsrRepository.save(stanjeUkidanje);
 		}else {
 			DnevnoStanjeRacuna novoStanjePrebacivanje = new DnevnoStanjeRacuna();
 			novoStanjePrebacivanje.setDatumPromenta(new Date());
@@ -60,7 +62,11 @@ public class UkidanjeServiceImpl implements UkidanjeService{
 			novoStanjePrebacivanje.setPrometUKorist(stanjeUkidanje.getNovoStanje());
 			novoStanjePrebacivanje.setNovoStanje(stanjePrebacivanje.getNovoStanje().add(stanjeUkidanje.getNovoStanje()));
 			
+			stanjeUkidanje.setPrometNaTeret(stanjeUkidanje.getNovoStanje());
+			stanjeUkidanje.setNovoStanje(stanjeUkidanje.getNovoStanje().subtract(stanjeUkidanje.getNovoStanje()));
+			
 			dsrRepository.save(novoStanjePrebacivanje);
+			dsrRepository.save(stanjeUkidanje);
 		}
 		
 		zaUkidanje.setValidan(false);
