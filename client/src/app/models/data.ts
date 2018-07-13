@@ -224,7 +224,7 @@ const Racun: TableInfo = {
   ],
   potomci: [
     { labela: 'Medjubakarski nalog', ruta: '/medjubankarskiNalog' },
-    { labela: 'Ukidanje', ruta: '/pravnaLica' },
+    { labela: 'Ukidanja', ruta: '/ukidanje' },
     { labela: 'Dnevna stanja racuna', ruta: '/dnevnoStanjeRacuna' }
   ],
   mozeUnos: true
@@ -431,6 +431,26 @@ const AnalitikaIzvoda: TableInfo = {
   import: () => `${environment.hostUrl}/api/analitika/xml`
 };
 
+const Ukidanje: TableInfo = {
+  kolone: ['Id ukidanja',
+    'Datum ukidanja', 'Sredstva prenesena na racun', 'Id ukinutog racuna'],
+  atributi: ['id', 'datumUkidanja', 'sredstvaSePrenoseNaRacun', 'racunId'],
+  naslov: 'Ukidanja',
+  podaciUrl: environment.hostUrl + '/api/ukidanje',
+  prikazForme: [
+    { labela: 'Id racuna za ukidanje', tip: 'text', imeKontrole: 'racunId', table: Racun, roditeljskaKolona: 'id' },
+    { labela: 'Racun na koji se prenose sredstva', tip: 'text', imeKontrole: 'sredstvaSePrenoseNaRacun', table: Racun, roditeljskaKolona: 'brojRacuna' }
+  ],
+  modelForme: {
+    racunId: [null, Validators.required],
+    sredstvaSePrenoseNaRacun: [null, Validators.required]
+  },
+  preci: [
+    { labela: 'Racun', ruta: '/racuni' },
+  ],
+  mozeUnos: true,
+}
+
 export const TableRoutes: TableRoute[] = [
   { ruta: 'drzave', labela: 'Drzave', data: Drzava },
   { ruta: 'valute', labela: 'Valute', data: Valuta },
@@ -444,5 +464,6 @@ export const TableRoutes: TableRoute[] = [
   { ruta: 'vrstePlacanja', labela: 'Vrste Placanja', data: VrstaPlacanja},
   { ruta: 'dnevnoStanjeRacuna', labela: 'Dnevno Stanje Racuna', data: DnevnoStanjeRacuna},
   { ruta: 'medjubankarskiNalog', labela: 'Medjubankarski Nalozi', data: MedjubankarskiNalog},
-  { ruta: 'analitikaIzvoda', labela: 'Analitika izvoda', data: AnalitikaIzvoda}
+  { ruta: 'analitikaIzvoda', labela: 'Analitika izvoda', data: AnalitikaIzvoda},
+  { ruta: 'ukidanje', labela: 'Ukidanje', data: Ukidanje}
 ];

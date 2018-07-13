@@ -78,10 +78,10 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 			return null;
 		}
 
-		if (racunPoverioca != null && racunDuznika == null) {
+		if (racunPoverioca != null && racunDuznika == null && (racunPoverioca.isValidan() == true)) {
 			System.out.println("Uplata");
 			uplata(analitikaDto, racunPoverioca);
-		} else if (racunPoverioca != null && racunDuznika != null) {
+		} else if (racunPoverioca != null && racunDuznika != null && ((racunPoverioca.isValidan() == true) && (racunDuznika.isValidan() == true))) {
 			System.out.println("Medjubankarski transfer");
 			medjubankarskiTransfer(analitikaDto, racunDuznika, racunPoverioca);
 		} else {
